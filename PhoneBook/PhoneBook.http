@@ -1,0 +1,14 @@
+@PhoneBook_HostAddress = http://localhost:5234
+
+GET {{PhoneBook_HostAddress}}/weatherforecast/
+Accept: application/json
+
+
+GET {{PhoneBook_HostAddress}}/api/Contact
+Accept: application/json
+
+
+GET {{PhoneBook_HostAddress}}/api/Contact/1e530419-8d0a-4d9f-a1a4-e64c705993c8
+Accept: application/json
+
+###
