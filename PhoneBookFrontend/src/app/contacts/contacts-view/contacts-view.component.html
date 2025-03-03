@@ -1,0 +1,30 @@
+<div class="contacts-view">
+  <div class="contacts-header">
+    <h2>Contact List</h2>
+    <button class="btn btn-add" (click)="onAdd()">Add Contact</button>
+  </div>
+
+  <div class="contacts-grid">
+    @for (contact of contacts?.contacts; track contact.id) {
+    <div class="contact-card">
+      <div class="contact-header">
+        <h3>{{ contact.name }} {{ contact.surname }}</h3>
+      </div>
+      <div class="contact-details">
+        <p><span>Email:</span> {{ contact.email }}</p>
+        <p><span>Phone:</span> {{ contact.phoneNumber }}</p>
+        <p><span>Category:</span> {{ contact.subcategory }}</p>
+      </div>
+      <div class="contact-actions">
+        <button class="btn btn-view" (click)="onDetails(contact)">
+          Details
+        </button>
+        <button class="btn btn-edit" (click)="onEdit(contact)">Edit</button>
+        <button class="btn btn-delete" (click)="onDelete(contact)">
+          Delete
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>

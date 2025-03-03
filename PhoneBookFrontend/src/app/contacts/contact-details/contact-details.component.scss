@@ -1,0 +1,201 @@
+.contact-detail-view {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #f0f4f1;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .contact-detail-card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(34, 60, 54, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(199, 212, 206, 0.5);
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease forwards;
+
+    .contact-header {
+      padding: 28px;
+      background-color: #ecf2ee;
+      border-bottom: 1px solid rgba(199, 212, 206, 0.5);
+
+      h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #2d3e40;
+        position: relative;
+        padding-left: 20px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 8px;
+          height: 80%;
+          background: linear-gradient(135deg, #4d7c73, #8ab5aa);
+          border-radius: 4px;
+        }
+      }
+    }
+
+    .contact-details {
+      padding: 32px 28px;
+      flex-grow: 1;
+      background-color: #f8faf9;
+
+      .detail-row {
+        display: flex;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(199, 212, 206, 0.5);
+
+        &:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+        }
+
+        .detail-label {
+          width: 120px;
+          font-weight: 600;
+          color: #2d3e40;
+          font-size: 1.05rem;
+        }
+
+        .detail-value {
+          flex: 1;
+          color: #4a5d5a;
+          font-size: 1.05rem;
+        }
+      }
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 28px;
+      background-color: #ecf2ee;
+      border-top: 1px solid rgba(199, 212, 206, 0.5);
+
+      .btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(34, 60, 54, 0.15);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        &.btn-back {
+          background-color: #d7e4e0;
+          color: #396158;
+
+          &:hover {
+            background-color: #c5d8d2;
+          }
+        }
+      }
+    }
+  }
+
+  .loading-state {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+
+    .loading-message {
+      background-color: #fff;
+      padding: 24px 32px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(34, 60, 54, 0.08);
+      border: 1px solid rgba(199, 212, 206, 0.5);
+
+      p {
+        color: #4a5d5a;
+        font-size: 1.1rem;
+        margin: 0;
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: 2px solid #8ab5aa;
+          border-top-color: transparent;
+          margin-right: 12px;
+          animation: spin 1s linear infinite;
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+
+    .contact-detail-card {
+      .contact-header {
+        padding: 20px;
+
+        h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .contact-details {
+        padding: 24px 20px;
+
+        .detail-row {
+          flex-direction: column;
+          margin-bottom: 20px;
+
+          .detail-label {
+            width: 100%;
+            margin-bottom: 6px;
+          }
+        }
+      }
+
+      .contact-actions {
+        padding: 16px 20px;
+      }
+    }
+  }
+}

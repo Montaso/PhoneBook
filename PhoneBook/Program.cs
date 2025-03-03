@@ -1,5 +1,5 @@
 using PhoneBook.Repositories;
-using PhoneBook.Services;
+using PhoneBook.src.Services;
 using PhoneBook.src.Functions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 var app = builder.Build();
@@ -32,6 +33,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(options =>
+    options
+    .WithOrigins(new[] {"http://localhost:4200"}) 
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+);
 
 app.UseAuthorization();
 app.MapControllers();

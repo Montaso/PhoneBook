@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using PhoneBook.src.Models;
 
-namespace PhoneBook.Services
+namespace PhoneBook.src.Services
 {
     public interface IContactService
     {
