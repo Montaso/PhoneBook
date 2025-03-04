@@ -99,6 +99,22 @@ namespace PhoneBook.Migrations
                     b.ToTable("subcategories");
                 });
 
+            modelBuilder.Entity("PhoneBook.src.Models.User", b =>
+                {
+                    b.Property<string>("Login")
+                        .HasColumnType("text")
+                        .HasColumnName("login");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("haslo");
+
+                    b.HasKey("Login");
+
+                    b.ToTable("users");
+                });
+
             modelBuilder.Entity("PhoneBook.src.Models.Contact", b =>
                 {
                     b.HasOne("PhoneBook.src.Models.Subcategory", "Subcategory")

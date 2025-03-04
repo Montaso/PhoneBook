@@ -1,0 +1,95 @@
+.contact-add-container {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #f8faf9;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(34, 60, 54, 0.08);
+  border: 1px solid rgba(199, 212, 206, 0.5);
+
+  h2 {
+    color: #2d3e40;
+    margin-bottom: 24px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+
+    .form-group {
+      margin-bottom: 16px;
+
+      label {
+        display: block;
+        font-weight: 500;
+        color: #2d3e40;
+        margin-bottom: 6px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid rgba(199, 212, 206, 0.8);
+        border-radius: 8px;
+        background: #fff;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: #4d7c73;
+          outline: none;
+        }
+      }
+
+      .is-invalid {
+        border-color: #b45252;
+      }
+
+      .error-message {
+        color: #b45252;
+        font-size: 0.9rem;
+        margin-top: 4px;
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+
+      button {
+        flex: 1;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin: 0 5px;
+      }
+
+      .btn-save {
+        background-color: #4d7c73;
+        color: white;
+
+        &:hover {
+          background-color: #3b6259;
+        }
+      }
+
+      .btn-cancel {
+        background-color: #d7e4e0;
+        color: #2d3e40;
+
+        &:hover {
+          background-color: #c5d8d2;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+.contacts-view {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #f0f4f1;
+
+  .contacts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    color: #2d3e40;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+
+  .buttons-container {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-add {
+    background-color: #4d7c73;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #3a625b;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(34, 60, 54, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(199, 212, 206, 0.5);
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(34, 60, 54, 0.12);
+    }
+
+    .contact-header {
+      padding: 20px;
+      background-color: #ecf2ee;
+      border-bottom: 1px solid rgba(199, 212, 206, 0.5);
+
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2d3e40;
+        display: flex;
+        align-items: center;
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #4d7c73, #8ab5aa);
+          margin-right: 12px;
+        }
+      }
+    }
+
+    .contact-details {
+      padding: 20px;
+      flex-grow: 1;
+      background-color: #f8faf9;
+
+      p {
+        margin: 12px 0;
+        color: #4a5d5a;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+
+        span {
+          width: 80px;
+          font-weight: 500;
+          color: #2d3e40;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background-color: #ecf2ee;
+      border-top: 1px solid rgba(199, 212, 206, 0.5);
+
+      .btn {
+        padding: 9px 16px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex: 1;
+        margin: 0 4px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        &.btn-view {
+          background-color: #d7e4e0;
+          color: #396158;
+
+          &:hover {
+            background-color: #c5d8d2;
+          }
+        }
+
+        &.btn-edit {
+          background-color: #e3ebe7;
+          color: #4d7c73;
+
+          &:hover {
+            background-color: #d1e0da;
+          }
+        }
+
+        &.btn-delete {
+          background-color: #f2e3e3;
+          color: #b45252;
+
+          &:hover {
+            background-color: #e9d1d1;
+          }
+        }
+      }
+    }
+  }
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e3ebe7;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #a3bdb5;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #7fa99e;
+  }
+
+  // Add animation
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-card {
+    animation: fadeIn 0.5s ease forwards;
+
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+      }
+    }
+  }
+}

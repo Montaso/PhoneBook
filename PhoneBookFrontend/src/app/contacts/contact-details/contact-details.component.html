@@ -1,0 +1,46 @@
+<div class="contact-detail-view">
+  <div *ngIf="contact" class="contact-detail-card">
+    <div class="contact-header">
+      <h2>Contact Details</h2>
+    </div>
+    <div class="contact-details">
+      <div class="detail-row">
+        <span class="detail-label">Name:</span>
+        <span class="detail-value">{{ contact.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Surname:</span>
+        <span class="detail-value">{{ contact.surname }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email:</span>
+        <span class="detail-value">{{ contact.email }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Phone:</span>
+        <span class="detail-value">{{ contact.phoneNumber }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Birth Date:</span>
+        <span class="detail-value">{{ contact.birthDate }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Category:</span>
+        <span class="detail-value">{{ contact.subcategory }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Password:</span>
+        <span class="detail-value">{{ contact.password }}</span>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <button class="btn btn-back" [routerLink]="['/']">Back</button>
+    </div>
+  </div>
+
+  <div *ngIf="!contact" class="loading-state">
+    <div class="loading-message">
+      <p>Loading contact details...</p>
+    </div>
+  </div>
+</div>

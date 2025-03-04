@@ -1,28 +1,30 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using PhoneBook.Services;
+using PhoneBook.src.Services;
 using PhoneBook.src.Dtos;
 using PhoneBook.src.Functions;
 using PhoneBook.src.Models;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ContactController : ControllerBase
 {
     private readonly IContactService _contactService;
+    private readonly ICategoryService _categoryService;
 
 
-    public ContactController(IContactService contactService)
+    public ContactController(IContactService contactService, ICategoryService categoryService)
     {
         _contactService = contactService;
+        _categoryService = categoryService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllContacts()
     {
         var contacts = await _contactService.GetAllContactsAsync();
-        return Ok(ContactsToResponseFunction.Apply(contacts));
+        return Ok(SimpleContactsToResponseFunction.Apply(contacts));
     }
 
     [HttpGet("{id}")]
@@ -38,6 +40,7 @@ public class ContactController : ControllerBase
         return NotFound();
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddContact([FromBody] PutContactRequest request)
     {
@@ -45,6 +48,7 @@ public class ContactController : ControllerBase
         return CreatedAtAction(nameof(GetContactById), new { id = result.Value.Id }, result.Value);
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<IActionResult> UpdateContact([FromBody] PutContactRequest request)
     {
@@ -52,6 +56,7 @@ public class ContactController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateContact([FromRoute] string id, [FromBody] PutContactRequest request)
     {
@@ -59,6 +64,7 @@ public class ContactController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteContact([FromRoute] string id)
     {

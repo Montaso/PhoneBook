@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PhoneBook.src.Models
+namespace PhoneBook.src.Dtos
 {
     public class GetContactResponse
     {

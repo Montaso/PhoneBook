@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PhoneBook.Dtos;
+using PhoneBook.src.Dtos;
 using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Functions

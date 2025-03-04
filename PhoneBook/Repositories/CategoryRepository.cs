@@ -20,8 +20,18 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Results<Ok<Category>, NotFound>> GetCategoryAsync(string name)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToString() == name);
+        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == name);
         return category is not null ? TypedResults.Ok(category) : TypedResults.NotFound();
+    }
+
+    public async Task<Results<Ok<Subcategory[]>, NotFound>> GetCategorySubcategoriesAsync(string name)
+    {
+        var subcategories = await _context.Subcategories
+            .Where(s => s.Category.Name == name)
+            .ToArrayAsync();
+
+        return TypedResults.Ok(subcategories);
+
     }
 
     public async Task<Created<Category>> AddCategoryAsync(Category category)
@@ -33,7 +43,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Results<NoContent, NotFound>> DeleteCategoryAsync(string name)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToString() == name);
+        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == name);
         if (category is null) return TypedResults.NotFound();
 
         _context.Categories.Remove(category);
@@ -57,11 +67,13 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Created<Subcategory>> AddSubcategoryAsync(Subcategory subcategory)
     {
-        var otherCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name == CategoryEnum.Other);
+        if(subcategory.Category is null) {
+            var otherCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name == "Inny");
 
-        if (otherCategory is null) throw new ArgumentException("No other category to assign subcategory to");
-        
-        subcategory.Category = otherCategory;
+            if (otherCategory is null) throw new ArgumentException("No other category to assign subcategory to");
+            
+            subcategory.Category = otherCategory;
+        }
 
         _context.Subcategories.Add(subcategory);
         await _context.SaveChangesAsync();

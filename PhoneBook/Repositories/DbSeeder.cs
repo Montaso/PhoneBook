@@ -12,9 +12,9 @@ public static class DbSeeder
         {
             var newCategories = new List<Category>()
             {
-                new Category { Name = CategoryEnum.Private, Subcategories = new List<Subcategory>() },
-                new Category { Name = CategoryEnum.Business, Subcategories = new List<Subcategory>() },
-                new Category { Name = CategoryEnum.Other, Subcategories = new List<Subcategory>() }
+                new Category { Name = "Prywatny", Subcategories = new List<Subcategory>() },
+                new Category { Name = "Służbowy", Subcategories = new List<Subcategory>() },
+                new Category { Name = "Inny", Subcategories = new List<Subcategory>() }
             };
 
             foreach (var category in newCategories)
