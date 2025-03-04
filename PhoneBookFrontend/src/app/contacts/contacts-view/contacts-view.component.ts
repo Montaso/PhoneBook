@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { ContactService } from '../services/contact.service';
 import { Contacts } from '../models/contacts.model';
 import { Contact } from '../models/contact.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-contacts-view',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './contacts-view.component.html',
   styleUrl: './contacts-view.component.scss',
 })
 export class ContactsViewComponent implements OnInit {
   private service = inject(ContactService);
+  public authService = inject(AuthService);
   contacts: Contacts | undefined;
   constructor(private router: Router) {}
 
@@ -38,5 +40,13 @@ export class ContactsViewComponent implements OnInit {
 
   onAdd(): void {
     this.router.navigate(['contact-add/']);
+  }
+
+  onLogin(): void {
+    this.router.navigate(['auth/']);
+  }
+
+  onLogout(): void {
+    this.authService.logout();
   }
 }

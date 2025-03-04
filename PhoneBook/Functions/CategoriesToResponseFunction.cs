@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PhoneBook.Dtos;
+using PhoneBook.src.Dtos;
 using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Functions
@@ -14,7 +14,7 @@ namespace PhoneBook.src.Functions
             {
                 Categories = entities.Select(category => new CategoryDto
                 {
-                    Name = category.Name.ToString(),
+                    Name = category.Name
                 }).ToList()
             };
         }

@@ -6,6 +6,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Contact> Contacts { get; set; } 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Subcategory> Subcategories{ get; set; }
+
+    public DbSet<User> Users{ get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
@@ -14,10 +16,6 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Category>()
-        .Property(x => x.Name)
-        .HasConversion<string>();
-
         modelBuilder.Entity<Category>()
         .HasMany(x => x.Subcategories)
         .WithOne(y => y.Category);

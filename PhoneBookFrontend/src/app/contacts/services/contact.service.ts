@@ -13,11 +13,11 @@ export class ContactService {
   constructor(private http: HttpClient) {}
 
   getContacts(): Observable<Contacts> {
-    return this.http.get<Contacts>('http://localhost:4200/api/Contact/');
+    return this.http.get<Contacts>('http://localhost:5234/api/Contact/');
   }
 
   getContact(guid: string): Observable<Contact> {
-    return this.http.get<Contact>('http://localhost:4200/api/Contact/' + guid);
+    return this.http.get<Contact>('http://localhost:5234/api/Contact/' + guid);
   }
 
   putContact(guid: string, contact: PutContact): Observable<Contact> {
@@ -29,13 +29,13 @@ export class ContactService {
 
   deleteContact(guid: string): Observable<Contact> {
     return this.http.delete<Contact>(
-      'http://localhost:4200/api/Contact/' + guid
+      'http://localhost:5234/api/Contact/' + guid
     );
   }
 
   postContact(contact: PutContact): Observable<Contact> {
     return this.http.post<Contact>(
-      'http://localhost:4200/api/Contact',
+      'http://localhost:5234/api/Contact',
       contact
     );
   }

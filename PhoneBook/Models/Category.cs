@@ -8,7 +8,7 @@ namespace PhoneBook.src.Models
     public class Category
     {
         [Column("nazwa", TypeName = "text")]
-        public CategoryEnum Name { get; set; }
+        public string Name { get; set; }
         public ICollection<Subcategory> Subcategories { get; set; }
     }
 }

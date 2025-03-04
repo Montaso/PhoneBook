@@ -5,5 +5,6 @@ export interface PutContact {
   password: string;
   phoneNumber: string;
   birthDate: Date;
+  category: string;
   subcategory: string;
 }

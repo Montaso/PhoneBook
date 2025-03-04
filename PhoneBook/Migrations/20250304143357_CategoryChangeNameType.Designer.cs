@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PhoneBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250304143357_CategoryChangeNameType")]
+    partial class CategoryChangeNameType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,22 +100,6 @@ namespace PhoneBook.Migrations
                     b.HasIndex("kategoria");
 
                     b.ToTable("subcategories");
-                });
-
-            modelBuilder.Entity("PhoneBook.src.Models.User", b =>
-                {
-                    b.Property<string>("Login")
-                        .HasColumnType("text")
-                        .HasColumnName("login");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("haslo");
-
-                    b.HasKey("Login");
-
-                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("PhoneBook.src.Models.Contact", b =>

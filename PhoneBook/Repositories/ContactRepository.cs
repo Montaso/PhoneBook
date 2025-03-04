@@ -38,6 +38,7 @@ public class ContactRepository : IContactRepository
 
     public async Task<Created<Contact>> AddContactAsync(Contact contact)
     {
+        // check if subcategory is filled
         if(contact.Subcategory != null)
         {
             var existingSubcategory = await _context.Subcategories
@@ -47,6 +48,13 @@ public class ContactRepository : IContactRepository
             {
                 contact.Subcategory = existingSubcategory;
             }
+        }
+        
+        // check if contact is already attached 
+        var existingContact = await _context.Contacts.FindAsync(contact.Id);
+        if (existingContact != null)
+        {
+            _context.Entry(existingContact).State = EntityState.Detached;
         }
 
         _context.Contacts.Add(contact);
@@ -67,6 +75,11 @@ public class ContactRepository : IContactRepository
             }
         }
 
+        var existingContact = await _context.Contacts.FindAsync(contact.Id);
+        if (existingContact != null)
+        {
+            _context.Entry(existingContact).State = EntityState.Detached;
+        }
         _context.Contacts.Update(contact);
         await _context.SaveChangesAsync();
         return TypedResults.NoContent();

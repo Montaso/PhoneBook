@@ -4,12 +4,12 @@ using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Dtos
 {
-    public class GetCategoriesResponse
+    public class GetSubcategoriesResponse
     {
-        public List<CategoryDto> Categories { get; init; } = new();
+        public List<SubcategoryDto> Subcategories { get; init; } = new();
     }
 
-    public record CategoryDto
+    public record SubcategoryDto
     {
         public string Name { get; set; }
     }

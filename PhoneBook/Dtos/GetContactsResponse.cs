@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using PhoneBook.src.Models;
 
-namespace PhoneBook.Dtos
+namespace PhoneBook.src.Dtos
 {
     public class GetContactsResponse
     {

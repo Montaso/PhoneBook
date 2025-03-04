@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
 using PhoneBook.Repositories;
 using PhoneBook.src.Services;
 using PhoneBook.src.Models;

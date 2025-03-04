@@ -6,21 +6,19 @@ using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Functions
 {
-    public class ContactsToResponseFunction
+    public class SimpleContactsToResponseFunction
     {
-        public static GetContactsResponse Apply(Contact[] entities)
+        public static GetSimpleContactsResponse Apply(Contact[] entities)
         {
-            return new GetContactsResponse
+            return new GetSimpleContactsResponse
             {
-                Contacts = entities.Select(contact => new ContactDto
+                Contacts = entities.Select(contact => new SimpleContactDto
                 {
                     Id = contact.Id,
                     Name = contact.Name,
                     Surname = contact.Surname,
                     Email = contact.Email,
-                    Password = contact.Password,
                     PhoneNumber = contact.PhoneNumber,
-                    BirthDate = contact.BirthDate,
                     Subcategory = contact.Subcategory?.Name ?? "null"
                 }).ToList()
             };

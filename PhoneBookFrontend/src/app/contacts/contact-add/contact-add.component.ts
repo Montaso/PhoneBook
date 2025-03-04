@@ -11,6 +11,7 @@ import { PutContact } from '../models/put-contact.model';
 import { CategoryService } from '../../categories/services/category.service';
 import { Categories } from '../../categories/models/categories.model';
 import { CommonModule } from '@angular/common';
+import { Subcategories } from '../../categories/models/subcategories.model';
 
 @Component({
   selector: 'app-contact-add',
@@ -21,6 +22,11 @@ import { CommonModule } from '@angular/common';
 export class ContactAddComponent {
   contactForm: FormGroup;
   categories: Categories | undefined;
+  subcategories: Subcategories | undefined;
+
+  showSubcategory: boolean = false;
+  isBusinessCategory: boolean = false;
+  isOtherCategory: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +41,8 @@ export class ContactAddComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       phoneNumber: ['', Validators.required],
       birthDate: ['', Validators.required],
-      subcategory: ['', Validators.required],
+      category: ['', Validators.required],
+      subcategory: [''],
     });
   }
 
@@ -44,6 +51,47 @@ export class ContactAddComponent {
       next: (categories) => (this.categories = categories),
       error: (err) => console.error('Error fetching categories:', err),
     });
+
+    //send subcategory get request on changing the category
+    this.contactForm
+      .get('category')
+      ?.valueChanges.subscribe((selectedCategory) => {
+        console.log(selectedCategory);
+        this.categoryService
+          .getCategorySubcategories(selectedCategory)
+          .subscribe({
+            next: (subcategories) => {
+              this.subcategories = subcategories;
+            },
+            error: (err) => console.error('Error fetching subcategories:', err),
+          });
+
+        this.updateSubcategoryField(selectedCategory);
+      });
+  }
+
+  updateSubcategoryField(selectedCategory: string): void {
+    if (selectedCategory === 'Służbowy') {
+      this.showSubcategory = true;
+      this.isBusinessCategory = true;
+      this.isOtherCategory = false;
+      this.contactForm.get('subcategory')?.setValue('');
+      this.contactForm.get('subcategory')?.setValidators([Validators.required]);
+    } else if (selectedCategory === 'Inny') {
+      this.showSubcategory = true;
+      this.isBusinessCategory = false;
+      this.isOtherCategory = true;
+      this.contactForm.get('subcategory')?.setValue('');
+      this.contactForm.get('subcategory')?.setValidators([Validators.required]);
+    } else {
+      this.showSubcategory = false;
+      this.isBusinessCategory = false;
+      this.isOtherCategory = false;
+      this.contactForm.get('subcategory')?.setValue('prywatny');
+      this.contactForm.get('subcategory')?.clearValidators();
+    }
+
+    this.contactForm.get('subcategory')?.updateValueAndValidity();
   }
 
   onSubmit(): void {

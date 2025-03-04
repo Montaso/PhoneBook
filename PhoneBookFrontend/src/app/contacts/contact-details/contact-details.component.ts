@@ -27,7 +27,5 @@ export class ContactDetailsComponent {
       .subscribe((contact: Contact) => {
         this.contact = contact;
       });
-
-      
   }
 }

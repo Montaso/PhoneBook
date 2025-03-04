@@ -1,7 +1,23 @@
 <div class="contacts-view">
   <div class="contacts-header">
     <h2>Contact List</h2>
-    <button class="btn btn-add" (click)="onAdd()">Add Contact</button>
+    <div class="buttons-container">
+      <button
+        class="btn btn-add"
+        *ngIf="!authService.isAuthenticated()"
+        (click)="onLogin()"
+      >
+        Login
+      </button>
+      <button
+        class="btn btn-add"
+        *ngIf="authService.isAuthenticated()"
+        (click)="onLogout()"
+      >
+        Logout
+      </button>
+      <button class="btn btn-add" (click)="onAdd()">Add Contact</button>
+    </div>
   </div>
 
   <div class="contacts-grid">
@@ -19,8 +35,18 @@
         <button class="btn btn-view" (click)="onDetails(contact)">
           Details
         </button>
-        <button class="btn btn-edit" (click)="onEdit(contact)">Edit</button>
-        <button class="btn btn-delete" (click)="onDelete(contact)">
+        <button
+          class="btn btn-edit"
+          *ngIf="authService.isAuthenticated()"
+          (click)="onEdit(contact)"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-delete"
+          *ngIf="authService.isAuthenticated()"
+          (click)="onDelete(contact)"
+        >
           Delete
         </button>
       </div>

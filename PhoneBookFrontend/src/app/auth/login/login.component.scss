@@ -1,0 +1,120 @@
+.login-form {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #f0f4f1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  .form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3e40;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(34, 60, 54, 0.1);
+    text-align: center;
+  }
+
+  fieldset {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(34, 60, 54, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(199, 212, 206, 0.5);
+    padding: 28px;
+    width: 100%;
+    max-width: 225px;
+    animation: fadeIn 0.4s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 16px;
+      width: 100%;
+
+      label {
+        font-weight: 600;
+        color: #2d3e40;
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+        text-align: center;
+      }
+
+      input {
+        padding: 12px;
+        border: 1px solid rgba(199, 212, 206, 0.5);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: #f8faf9;
+        transition: all 0.2s ease;
+        width: 80%;
+        text-align: center;
+
+        &:focus {
+          outline: none;
+          border-color: #4d7c73;
+          box-shadow: 0 0 8px rgba(77, 124, 115, 0.3);
+        }
+      }
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    width: 100%;
+
+    .button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &.button-primary {
+        background-color: #4d7c73;
+        color: #fff;
+
+        &:hover {
+          background-color: #396158;
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+
+    fieldset {
+      padding: 24px;
+    }
+  }
+}
