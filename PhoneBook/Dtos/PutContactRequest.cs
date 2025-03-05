@@ -7,6 +7,8 @@ namespace PhoneBook.src.Dtos
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public DateOnly BirthDate { get; set; }
+
+        // simplified category and subcategory storage
         public string Category { get; set; }
         public string Subcategory { get; set; }
     }

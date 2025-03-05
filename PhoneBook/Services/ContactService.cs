@@ -9,6 +9,7 @@ public class ContactService : IContactService
     private IContactRepository _contactRepository;
     private ICategoryRepository _categoryRepository;
 
+    // inject repos into service
     public ContactService(IContactRepository contactRepository, ICategoryRepository categoryRepository) {
         this._contactRepository = contactRepository;
         this._categoryRepository = categoryRepository;
@@ -16,11 +17,14 @@ public class ContactService : IContactService
 
     public async Task<Created<Contact>> AddContactAsync(Contact contact)
     {
+        // check if contact subcategory exists
         var result = await _categoryRepository.GetSubcategoryAsync(contact.Subcategory.Name);
         if (result.Result is NotFound) {
+            // add if it does not
             await _categoryRepository.AddSubcategoryAsync(contact.Subcategory);
         }
 
+        // hash contact password
         contact.Password = PasswordHasher.HashPassword(contact.Password);
 
         return await _contactRepository.AddContactAsync(contact);
@@ -48,11 +52,13 @@ public class ContactService : IContactService
 
     public async Task<Results<NoContent, NotFound>> UpdateContactAsync(Contact contact)
     {
+        // check if contacts subcategory exists
         var result = await _categoryRepository.GetSubcategoryAsync(contact.Subcategory.Name);
         if (result.Result is NotFound) {
+            // add subcategory if it does not exist
             await _categoryRepository.AddSubcategoryAsync(contact.Subcategory);
         }
-
+        // hash contact password
         contact.Password = PasswordHasher.HashPassword(contact.Password);
 
         return await _contactRepository.UpdateContactAsync(contact);

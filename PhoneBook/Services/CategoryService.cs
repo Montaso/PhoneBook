@@ -8,11 +8,10 @@ namespace PhoneBook.src.Services
     {
         private ICategoryRepository _categoryRepository;
 
+        // inject repos into the service
         public CategoryService(ICategoryRepository categoryRepository) {
             _categoryRepository = categoryRepository;
         }
-
-        
 
         public async Task<Category[]> GetAllCategoriesAsync()
         {
@@ -31,9 +30,11 @@ namespace PhoneBook.src.Services
 
         public async Task<Results<Created<Category>, NoContent>> AddCategoryAsync(Category category)
         {
+            // check if category already exists
             var existingCategory = await _categoryRepository.GetCategoryAsync(category.Name);
             if (existingCategory.Result is Ok<Category> okResult)
             {
+                // if category exists return nocontent
                 return TypedResults.NoContent();
             }
 
@@ -42,9 +43,11 @@ namespace PhoneBook.src.Services
 
         public async Task<Results<Created<Subcategory>, NoContent>> AddSubcategoryAsync(Subcategory subcategory)
         {
+            // check if subcategory exists
             var existingSubcategory = await _categoryRepository.GetSubcategoryAsync(subcategory.Name);
             if (existingSubcategory.Result is Ok<Subcategory> okResult)
             {
+                // if subcategory exists return nocontent
                 return TypedResults.NoContent();
             }
 

@@ -20,9 +20,11 @@ namespace PhoneBook.src.Services
 
         public async Task<Results<Created<User>, NoContent>> AddUserAsync(User user)
         {
+            // check if user exists
             var userResult = await _userRepository.GetUserAsync(user.Login);
             if (userResult.Result is NotFound)
             {
+                // if does not exist hash password and use repository
                 user.Password = PasswordHasher.PasswordHasher.HashPassword(user.Password);
                 return await _userRepository.AddUserAsync(user);
             }
@@ -35,6 +37,7 @@ namespace PhoneBook.src.Services
 
             if(userResult.Result is Ok<User> okResult)
             {
+                // check if password matches the one retrieved from database 
                 if(PasswordHasher.PasswordHasher.verifyPassword(user.Password, okResult.Value.Password))
                 {
                     return true;

@@ -8,6 +8,7 @@ namespace PhoneBook.src.Functions
 {
     public class SubcategoriesToResponseFunction
     {
+        // function to handle subcategory get response
         public static GetSubcategoriesResponse Apply(Subcategory[] entities)
         {
             return new GetSubcategoriesResponse

@@ -6,6 +6,7 @@ using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Functions
 {
+    // function to refactor category to a json response
     public class CategoriesToResponseFunction
     {
         public static GetCategoriesResponse Apply(Category[] entities)
