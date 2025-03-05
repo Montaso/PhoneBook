@@ -16,7 +16,13 @@
       >
         Logout
       </button>
-      <button class="btn btn-add" (click)="onAdd()">Add Contact</button>
+      <button
+        class="btn btn-add"
+        *ngIf="authService.isAuthenticated()"
+        (click)="onAdd()"
+      >
+        Add Contact
+      </button>
     </div>
   </div>
 
