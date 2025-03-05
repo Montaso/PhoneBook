@@ -11,12 +11,12 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Categories> {
-    return this.http.get<Categories>('http://localhost:5234/api/Category/');
+    return this.http.get<Categories>('http://localhost:8080/api/Category/');
   }
 
   getCategorySubcategories(name: string): Observable<Subcategories> {
     return this.http.get<Subcategories>(
-      'http://localhost:5234/api/Category/' + name
+      'http://localhost:8080/api/Category/' + name
     );
   }
 }
