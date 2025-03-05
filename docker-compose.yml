@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: pbuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: PhoneBook
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - PhoneBook_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pbuser -d PhoneBook"]
+      interval: 30s
+      retries: 6
+      start_period: 90s
+      timeout: 20s
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./PhoneBook/Dockerfile
+    container_name: backend_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=PhoneBook;Username=pbuser;Password=password
+    networks:
+      - PhoneBook_network
+
+  frontend:
+    build:
+      context: ./PhoneBookFrontend
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    ports:
+      - "80:80"
+    volumes:
+      - ./ngnix.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+    networks:
+      - PhoneBook_network
+
+volumes:
+  postgres_data:
+networks:
+  PhoneBook_network:
