@@ -6,6 +6,7 @@ using PhoneBook.src.Models;
 
 namespace PhoneBook.src.Functions
 {
+    // function to refactor contacts to a json response
     public class ContactsToResponseFunction
     {
         public static GetContactsResponse Apply(Contact[] entities)

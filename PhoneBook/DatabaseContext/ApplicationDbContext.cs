@@ -6,14 +6,15 @@ public class ApplicationDbContext : DbContext
     public DbSet<Contact> Contacts { get; set; } 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Subcategory> Subcategories{ get; set; }
-
     public DbSet<User> Users{ get; set; }
     
+    // connection to the database
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseNpgsql("Host=postgres;Port=5432;Database=PhoneBook;Username=pbuser;Password=password");
     }
 
+    // set up database relations
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>()

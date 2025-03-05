@@ -5,6 +5,7 @@ namespace PhoneBook.src.Functions
 {
 public class ContactToResponseFunction
 {
+    // function to handle get request for contact
     public static GetContactResponse Apply(Contact entity)
     {
         return new GetContactResponse

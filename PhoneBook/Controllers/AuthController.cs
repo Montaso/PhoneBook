@@ -20,9 +20,11 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
+    // verify login info 
     [HttpPost("login")]
     public IActionResult Login([FromBody] User login)
     {
+        // check if strings are empty
         if (login is null || string.IsNullOrWhiteSpace(login.Login) || string.IsNullOrWhiteSpace(login.Password))
             return BadRequest("Invalid request");
 
@@ -46,13 +48,16 @@ public class AuthController : ControllerBase
         return BadRequest("User registration failed.");
     }
 
+    // JWT token generation 
     private string GenerateJwtToken(string username)
     {
+        
         var key = _config.GetValue<string>("Jwt:Key") ?? throw new Exception("JWT Key is missing");
         var issuer = _config.GetValue<string>("Jwt:Issuer") ?? "default-issuer";
         var audience = _config.GetValue<string>("Jwt:Audience") ?? "default-audience";
         var tokenValidity = _config.GetValue<int>("Jwt:TokenValidTimeInMinutes", 60);
 
+        // prepare symmetric key and credentials
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 

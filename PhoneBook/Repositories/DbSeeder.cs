@@ -3,6 +3,7 @@ using PhoneBook.Repositories;
 using PhoneBook.src.Models;
 using PhoneBook.src.PasswordHasher;
 
+// populate the initial database if connected and database is empty
 public static class DbSeeder
 {
     public static async Task SeedAsync(IContactRepository contactRepository, ICategoryRepository categoryRepository)

@@ -5,6 +5,7 @@ namespace PhoneBook.src.Functions
 {
     public class RequestToContactFunction
     {
+        // function to refactor a contact request contact object
         public static Contact Apply(Guid id, PutContactRequest request)
         {
             return new Contact
